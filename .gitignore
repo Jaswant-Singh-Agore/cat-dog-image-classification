@@ -268,3 +268,15 @@ logs/
 # Build folders
 build/
 dist/
+
+# Ignore all .h5 files in models folder
+models/*.h5
+
+# Don't ignore .keras files
+# (so no *.keras pattern here)
+
+# Ignore common unwanted files/folders
+__pycache__/
+.vscode/
+*.pyc
+.DS_Store
