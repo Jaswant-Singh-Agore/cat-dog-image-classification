@@ -248,6 +248,12 @@ datasets/
 *.tfrecord
 *.tfrecords
 
+__pycache__/
+.git/
+.vscode/
+*.pyc
+
+
 # Log files
 logs/
 *.log
