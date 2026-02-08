@@ -2,6 +2,7 @@ import numpy as np
 from flask import Flask, request, render_template
 from tensorflow import keras
 from PIL import Image
+import os
 
 MODEL_PATH = "models/model_final.keras"
 IMG_SIZE = (150, 150)
@@ -44,4 +45,5 @@ def index():
     )
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000,debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
