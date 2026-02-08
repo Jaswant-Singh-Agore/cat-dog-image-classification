@@ -3,7 +3,7 @@ from flask import Flask, request, render_template
 from tensorflow import keras
 from PIL import Image
 
-MODEL_PATH = "models/best_model_final.h5"
+MODEL_PATH = "models/model_final.keras"
 IMG_SIZE = (150, 150)
 CLASS_NAMES = ["Cat", "Dog"]
 
