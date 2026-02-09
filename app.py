@@ -5,7 +5,7 @@ from PIL import Image
 import os
 
 MODEL_PATH = "models/model_final.keras"
-IMG_SIZE = (150, 150)
+IMG_SIZE = (224, 224)
 CLASS_NAMES = ["Cat", "Dog"]
 
 print(f"Loading model from: {MODEL_PATH}")
@@ -15,9 +15,13 @@ app = Flask(__name__)
 
 def preprocess_image(file):
     img = Image.open(file).convert("RGB")
-    img = img.resize(IMG_SIZE)
+    img = img.resize((224, 224), Image.Resampling.LANCZOS)
     arr = np.array(img).astype("float32") / 255.0
-    return np.expand_dims(arr, axis=0)  
+    arr = arr * 2.0 - 1.0
+    return np.expand_dims(arr, axis=0)
+
+
+  
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -47,3 +51,4 @@ def index():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
