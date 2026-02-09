@@ -8,8 +8,15 @@ MODEL_PATH = "models/model_final.keras"
 IMG_SIZE = (224, 224)
 CLASS_NAMES = ["Cat", "Dog"]
 
-print(f"Loading model from: {MODEL_PATH}")
-model = keras.models.load_model(MODEL_PATH)
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        print(f"Loading model from: {MODEL_PATH}")
+        model = keras.models.load_model(MODEL_PATH)
+    return model
+
 
 app = Flask(__name__)
 
@@ -36,10 +43,12 @@ def index():
             error = "Please upload an image."
         else:
             x = preprocess_image(file)
-            preds = model.predict(x)[0]          
+            model_loaded = get_model()
+            preds = model_loaded.predict(x)[0]
             label_idx = preds.argmax()           
             prediction = CLASS_NAMES[label_idx]  
             confidence = round(preds[label_idx] * 100, 2)
+          
 
     return render_template(
         "index.html",
