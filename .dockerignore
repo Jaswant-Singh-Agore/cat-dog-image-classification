@@ -1,5 +1,6 @@
 .git
 .gitignore
+.github
 __pycache__
 *.pyc
 *.pyo
@@ -12,3 +13,4 @@ venv
 *.log
 notebooks
 tests
+node_modules
